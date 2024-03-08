@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: faveocloud-env
+  namespace: cronjobs
+data:
+  .env: |
+    APP_NAME=Faveo:b9f9fd3380616de9c4ea9b72279ea271
+    APP_DEBUG=false
+    APP_BUGSNAG=true
+    APP_URL=https://cloud.fratergroup.in
+    APP_KEY=base64:h3KjrHeVxyE+j6c8whTAs2YI+7goylGZ/e2vElgXT6I=
+    DB_TYPE=mysql
+    DB_WRITE_HOST=
+    DB_READ_HOST=
+    DB_HOST="faveo-dev-mysql-do-user-8259062-0.c.db.ondigitalocean.com"
+    DB_PORT="25060"
+    DB_DATABASE="faveo_multitenant"
+    DB_USERNAME="doadmin"
+    DB_PASSWORD="AVNS_cNQxad1aClf4pGbEjkc"
+    DB_ENGINE=InnoDB
+    MAIL_MAILER=smtp
+    MAIL_HOST=mailtrap.io
+    MAIL_PORT=2525
+    MAIL_USERNAME=null
+    MAIL_PASSWORD=null
+    SESSION_DRIVER=database
+    SESSION_COOKIE_NAME=faveo_7435
+    QUEUE_DRIVER=sync
+    FCM_SERVER_KEY=AIzaSyBJNRvyub-_-DnOAiIJfuNOYMnffO2sfw4
+    FCM_SENDER_ID=505298756081
+    PROBE_PASS_PHRASE=c517039b09bb14b693b0eb812626f246
+    REDIS_DATABASE=0
+    BROADCAST_DRIVER=pusher
+    LARAVEL_WEBSOCKETS_ENABLED=false
+    LARAVEL_WEBSOCKETS_PORT=6001
+    LARAVEL_WEBSOCKETS_HOST=127.0.0.1
+    LARAVEL_WEBSOCKETS_SCHEME=http
+    PUSHER_APP_ID=rEjY1HOEH78SLY1t
+    PUSHER_APP_KEY=bd2b896e888ecf463db7959c42cb0245
+    PUSHER_APP_SECRET=d3cb3738065ee7013aafef6fb34fdecd
+    PUSHER_APP_CLUSTER=mt1
+    MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
+    MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+    SOCKET_CLIENT_SSL_ENFORCEMENT=false
+    LARAVEL_WEBSOCKETS_SSL_LOCAL_CERT=null
+    LARAVEL_WEBSOCKETS_SSL_LOCAL_PK=null
+    LARAVEL_WEBSOCKETS_SSL_PASSPHRASE=null
+    DB_SSL_KEY=
+    DB_SSL_CERT=
+    DB_SSL_CA=/etc/mysql/ca-certificate.crt
+    DB_SSL_VERIFY_PEER_CERT=
+    CENTRAL_DOMAIN=cloud.fratergroup.in
+    DB_INSTALL=1
+    CACHE_DRIVER=array
+    AWS_SECRET_ACCESS_KEY=BI05G87EmpWXwZ3LNchhxxtglrpHsjk+cPV9CWq33B8
+    AWS_ACCESS_KEY_ID=DO00UG78ANMQH3YUBJAB
+    AWS_DEFAULT_REGION=us-east-1
+    AWS_BUCKET=faveo-cloud
+    AWS_ENDPOINT=https://sfo3.digitaloceanspaces.com
+    FILESYSTEM_DISK=s3
+    THIRD_PARTY_APP_SECRET=FAVEOCLOUDSECRET
+    THIRD_PARTY_APP_KEY=OIVk8AVtCx29TFgcHWZNDaBT534eJqlp
+    REDIS_HOST=faveo-dev-redis-do-user-8259062-0.c.db.ondigitalocean.com
+    REDIS_PORT= 25061
+    REDIS_PASSWORD=AVNS_8G5gR7j3SoLeDS-jnm_
+    REDIS_SCHEME=tls

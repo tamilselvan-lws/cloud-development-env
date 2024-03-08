@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: supervisor-deploy
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: supervisor-pods
+  template:
+    metadata:
+      labels:
+        app: supervisor-pods
+    spec:
+#      nodeSelector:
+#        doks.digitalocean.com/node-pool: faveo-app-supervisor-nodes
+      containers:
+      - name: helpdesk-supervisor
+        image: ladybird/faveo-multi-tenant-supervisor:dev.82
+        resources:
+          limits:
+            memory: 2548Mi
+            cpu: 2
+          requests:
+            memory: 1524Mi
+            cpu: 800m
+        volumeMounts:
+        - name: volume-data
+          mountPath: /var/www/html
+        - name: cm
+          mountPath: /var/www/html/.env
+          subPath: .env
+      initContainers:
+      - name: fetch
+        image: vishwashaxoor/fetcher
+        command: ['sh','-c','apt update;apt install git -y; git clone --branch release-800 https://thiru3706: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@github.com/ladybirdweb/faveo-cloud.git html;chown -R www-data:www-data /html']
+#        command: ['sh','-c','apt update;apt install git -y; curl https://billing.faveohelpdesk.com/download/faveo\?order_number\=85070569\&serial_key\=5HINJHDGDIBK0000 --output faveo.zip; unzip faveo.zip -d html;chown -R www-data:www-data /html']
+        volumeMounts:
+        - name: volume-data
+          mountPath: /html
+      volumes:
+      - name: volume-data
+        emptyDir: {}
+      - name: cm
+        configMap:
+          name: faveocloud-env
