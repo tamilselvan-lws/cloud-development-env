@@ -1,25 +1,31 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-    annotations:
-      kubernetes.io/ingress.class: nginx
-      cert-manager.io/cluster-issuer: letsencrypt-prod
-    name: faveo-ingress
-    namespace: default
-
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "1800"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "1800"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "30"
+    nginx.ingress.kubernetes.io/proxy-body-size: "600m"
+    nginx.org/client-max-body-size: "600m"
+    nginx.ingress.kubernetes.io/ssl-passthrough: "false"
+    nginx.ingress.kubernetes.io/proxy-http-version: "1.1"
+  name: faveo-ingress
+  namespace: faveo-app
 spec:
-   tls:
-   - hosts:
-     - '*.pandaglow.in'
-     secretName: faveo-tls
-   rules:
-    - host: '*.pandaglow.in'
-      http:
-        paths:
-         - path: /
-           pathType: Prefix
-           backend:
-             service:
-               name: faveocloud-svc
-               port:
-                 number: 80
+  tls:
+  - hosts:
+    - '*.mrmrs.in'
+    secretName: faveo-tls
+  rules:
+  - host: '*.mrmrs.in'
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: faveocloud-svc
+            port:
+              number: 80

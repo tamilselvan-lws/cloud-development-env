@@ -5,13 +5,17 @@ metadata:
   namespace: cert-manager
 spec:
   acme:
-    email: tamil.selvan@ladybirdweb.com
+    # Email address used for ACME registration
+    email: tamilsanmia@gmail.com
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
+      # Name of a secret used to store the ACME account private key
       name: letsencrypt-prod
+    # Add a single challenge solver, HTTP01 using nginx
     solvers:
-    - dns01:
-        cloudflare:
-          apiTokenSecretRef:
-            name: cloudflare-api-token-secret
-            key: api-token
+#    - selector: {}
+     - dns01:
+        digitalocean:
+          tokenSecretRef:
+            name: digitalocean-dns
+            key: access-token

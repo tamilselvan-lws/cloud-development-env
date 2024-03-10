@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: faveocloud-svc
-  namespace: default
+  namespace: faveo-app
 spec:
   type: ClusterIP
   ports:
@@ -15,7 +15,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: faveocloud-deploy
-  namespace: default
+  namespace: faveo-app
 spec:
   replicas: 1
   selector:
@@ -61,20 +61,20 @@ spec:
         volumeMounts:
         - name: volume-data
           mountPath: /var/www/html
-#        - name: cm
-#          mountPath: /var/www/html/.env
-#          subPath: .env
+        - name: cm
+          mountPath: /var/www/html/.env
+          subPath: .env
       initContainers:
       - name: fetch
-        image: vishwashaxoor/fetcher
-        command: ['sh','-c','apt update;apt install git -y; curl https://billing.faveohelpdesk.com/download/faveo\?order_number\=85070569\&serial_key\=5HINJHDGDIBK0000 --output faveo.zip; unzip faveo.zip -d html;chown -R www-data:www-data /html']
-#        command: ['sh','-c','apt update;apt install git -y; git clone --branch release-800 https://thiru3706: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@github.com/ladybirdweb/faveo-cloud.git html;chown -R www-data:www-data /html']
+        image: tamilselvanlws/faveo-fetcher:v1
+#        command: ['sh','-c','apt update;apt install git -y; curl https://billing.faveohelpdesk.com/download/faveo\?order_number\=85070569\&serial_key\=5HINJHDGDIBK0000 --output faveo.zip; unzip faveo.zip -d html;chown -R www-data:www-data /html']
+        command: ['sh','-c','apt update;apt install git -y; git clone --branch master https://tamilselvan-lws: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@github.com/ladybirdweb/faveo-cloud.git html;chown -R www-data:www-data /html']
         volumeMounts:
         - name: volume-data
           mountPath: /html
       volumes:
       - name: volume-data
         emptyDir: {}
-#      - name: cm
-#        configMap:
-#          name: faveocloud-env
+      - name: cm
+        configMap:
+          name: faveocloud-env
